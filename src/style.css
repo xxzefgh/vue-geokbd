@@ -1,0 +1,53 @@
+.vue-geokbd--statusMessage {
+    width: 300px;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -150px;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 0 0 .2em .2em;
+    animation-duration: .3s;
+    animation-fill-mode: both;
+    display: none;
+}
+
+.vue-geokbd--statusMessage.hidden {
+    display: block;
+    animation-name: vue-geokbd--slideOutUp;
+}
+
+.vue-geokbd--statusMessage.visible {
+    display: block;
+    animation-name: vue-geokbd--slideInDown;
+}
+
+.vue-geokbd--statusMessage-text {
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+    top: 20%;
+}
+
+@keyframes vue-geokbd--slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes vue-geokbd--slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, -100%, 0);
+  }
+}
