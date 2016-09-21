@@ -2,6 +2,8 @@
 
 Simple directive to convert english characters to georgian in `<input>` and `<textarea>` fields
 
+[Demo](https://ns-uaomluarir.now.sh/)
+
 ### Installation
 
 #### Bower
