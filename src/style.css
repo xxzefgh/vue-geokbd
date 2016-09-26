@@ -1,6 +1,6 @@
 .vue-geokbd--statusMessage {
     width: 300px;
-    height: 50px;
+    height: 40px;
     position: fixed;
     top: 0;
     left: 50%;
@@ -10,25 +10,25 @@
     animation-duration: .3s;
     animation-fill-mode: both;
     display: none;
+    align-items: center;
+    justify-content: center;
     z-index: 999;
 }
 
 .vue-geokbd--statusMessage.hidden {
-    display: block;
+    display: flex;
     animation-name: vue-geokbd--slideOutUp;
 }
 
 .vue-geokbd--statusMessage.visible {
-    display: block;
+    display: flex;
     animation-name: vue-geokbd--slideInDown;
 }
 
 .vue-geokbd--statusMessage-text {
     color: #fff;
-    font-size: 12px;
     text-align: center;
-    position: relative;
-    top: 20%;
+    font-size: 12px;
 }
 
 @keyframes vue-geokbd--slideInDown {
