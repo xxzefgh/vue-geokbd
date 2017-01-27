@@ -1,5 +1,5 @@
-import handleKeypress from './keypress'
-import statusMsg from './statusMsg'
+import handleKeypress from './keypress';
+import statusMsg from './statusMsg';
 
 export default (options) => ({
   bind: function () {

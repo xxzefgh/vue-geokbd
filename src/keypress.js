@@ -1,23 +1,3 @@
-export default function handleKeypress(evt) {
-  var el = evt.target;
-  var which = evt.which;
-  var to = convertChar(which);
-
-  // Don't take any actions if conversion didn't happen
-  if (which === to) {
-    return;
-  }
-  evt.preventDefault();
-
-  // Insert converted char
-  var sel = getInputSelection(el);
-  var val = el.value;
-  el.value = val.slice(0, sel.start) + String.fromCharCode(to) + val.slice(sel.end);
-
-  // Move caret to correct position
-  setInputSelection(el, sel.start + 1, sel.start + 1);
-}
-
 function convertChar(chIndex) {
   var alphabet = 'abgdevzTiklmnopJrstufqRySCcZwWxjh';
   var ch = String.fromCharCode(chIndex);
@@ -35,15 +15,15 @@ function getInputSelection(el) {
     normalizedValue, range,
     textInputRange, len, endRange;
 
-  if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+  if (typeof el.selectionStart === 'number' && typeof el.selectionEnd === 'number') {
     start = el.selectionStart;
     end = el.selectionEnd;
   } else {
     range = document.selection.createRange();
 
-    if (range && range.parentElement() == el) {
+    if (range && range.parentElement() === el) {
       len = el.value.length;
-      normalizedValue = el.value.replace(/\r\n/g, "\n");
+      normalizedValue = el.value.replace(/\r\n/g, '\n');
 
       // Create a working TextRange that lives only in the input
       textInputRange = el.createTextRange();
@@ -55,17 +35,17 @@ function getInputSelection(el) {
       endRange = el.createTextRange();
       endRange.collapse(false);
 
-      if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+      if (textInputRange.compareEndPoints('StartToEnd', endRange) > -1) {
         start = end = len;
       } else {
-        start = -textInputRange.moveStart("character", -len);
-        start += normalizedValue.slice(0, start).split("\n").length - 1;
+        start = -textInputRange.moveStart('character', -len);
+        start += normalizedValue.slice(0, start).split('\n').length - 1;
 
-        if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+        if (textInputRange.compareEndPoints('EndToEnd', endRange) > -1) {
           end = len;
         } else {
-          end = -textInputRange.moveEnd("character", -len);
-          end += normalizedValue.slice(0, end).split("\n").length - 1;
+          end = -textInputRange.moveEnd('character', -len);
+          end += normalizedValue.slice(0, end).split('\n').length - 1;
         }
       }
     }
@@ -78,22 +58,23 @@ function getInputSelection(el) {
 }
 
 function offsetToRangeCharacterMove(el, offset) {
-  return offset - (el.value.slice(0, offset).split("\r\n").length - 1);
+  return offset - (el.value.slice(0, offset).split('\r\n').length - 1);
 }
 
 function setInputSelection(el, startOffset, endOffset) {
-  if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+  if (typeof el.selectionStart === 'number' && typeof el.selectionEnd === 'number') {
     el.selectionStart = startOffset;
     el.selectionEnd = endOffset;
   } else {
-    var range = el.createTextRange();
-    var startCharMove = this.offsetToRangeCharacterMove(el, startOffset);
+    let range = el.createTextRange();
+    let startCharMove = offsetToRangeCharacterMove(el, startOffset);
+
     range.collapse(true);
-    if (startOffset == endOffset) {
-      range.move("character", startCharMove);
+    if (startOffset === endOffset) {
+      range.move('character', startCharMove);
     } else {
-      range.moveEnd("character", this.offsetToRangeCharacterMove(el, endOffset));
-      range.moveStart("character", startCharMove);
+      range.moveEnd('character', offsetToRangeCharacterMove(el, endOffset));
+      range.moveStart('character', startCharMove);
     }
     range.select();
   }
@@ -101,4 +82,25 @@ function setInputSelection(el, startOffset, endOffset) {
   // A little 'hack' to keep natural browser behavior while typing
   el.blur();
   el.focus();
+}
+
+export default function handleKeypress(evt) {
+  const el = evt.target;
+  const which = evt.which;
+  const to = convertChar(which);
+
+  // Don't take any actions if conversion didn't happen
+  if (which === to) {
+    return;
+  }
+  evt.preventDefault();
+
+  // Insert converted char
+  const sel = getInputSelection(el);
+  const val = el.value;
+
+  el.value = val.slice(0, sel.start) + String.fromCharCode(to) + val.slice(sel.end);
+
+  // Move caret to correct position
+  setInputSelection(el, sel.start + 1, sel.start + 1);
 }

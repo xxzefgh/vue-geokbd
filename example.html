@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Demo - vue-geokbd</title>
+    <style>
+        html {
+            font-family: "DejaVu Sans", sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        a {
+            color: #4F92C0;
+            text-decoration: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 300;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #app {
+            width: 600px;
+            padding: 0 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+        #main {
+            margin-top: 70px;
+        }
+        .title {
+            font-size: 4em;
+            color: #4F92C0;
+        }
+        .desc {
+            font-size: 15px;
+            color: #7f8c8d;
+        }
+        .github-link {
+            font-size: 22px;
+        }
+        .demo {
+            margin-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="./dist/css/vue-geokbd.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.0/vue.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <h1 class="title">vue-geokbd</h1>
+        <h4 class="desc">A Vue.js directive</h4>
+
+        <a class="github-link" href="https://github.com/brunjick/vue-geokbd">Source on GitHub</a>
+
+        <div class="demo">
+            <h3>&lt;textarea&gt;</h3>
+            <textarea v-model="inputText" v-geokbd></textarea>
+            <h3>&lt;input&gt;</h3>
+            <input v-model="inputText" type="text" v-geokbd>
+        </div>
+    </div>
+</div>
+
+<script src="./dist/js/vue-geokbd.js"></script>
+<script>
+    Vue.use(window['vue-geokbd'], {
+      enabled: true
+    });
+
+    new Vue({
+      el: '#app',
+
+      data: function () {
+        return {
+          inputText: ''
+        };
+      }
+    });
+</script>
+</body>
+</html>

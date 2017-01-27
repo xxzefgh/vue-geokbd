@@ -8,21 +8,21 @@ Simple directive to convert english characters to georgian in `<input>` and `<te
 
 #### Bower
 ```bash
-bower install vue-geokbd --save 
+bower install vue-geokbd --save
 ```
 
 #### NPM
 ```bash
-npm install vue-geokbd --save 
+npm install vue-geokbd --save
 ```
 
 ### Getting Started
 
 #### HTML
 ```html
-<script src="path_to_components/vue-geokbd/dist/vue-geokbd.min.js"></script>
+<script src="path_to_components/vue-geokbd/dist/js/vue-geokbd.min.js"></script>
 <script>
-    // Vue object should be available here 
+    // Vue object should be available here
     Vue.use(window['vue-geokbd']);
 </script>
 ```
@@ -62,20 +62,4 @@ Vue.use(geokbd, {
     // Show status message when focus is on element
     statusMessage: true
 });
-```
-
-### Build Setup
-
-``` bash
-# Install dependencies
-npm install
-
-# Serve with hot reload at localhost:8080
-npm run dev
-
-# Build the component to UMD js
-npm run build
-
-# Build the dev page
-npm run build:demo
 ```

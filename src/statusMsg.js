@@ -4,8 +4,7 @@ const STATUS_MSG_CLASS = 'vue-geokbd--statusMessage';
 const STATUS_MSG_CLASS_VISIBLE = STATUS_MSG_CLASS + ' visible';
 const STATUS_MSG_CLASS_HIDDEN = STATUS_MSG_CLASS + ' hidden';
 
-var element = undefined;
-var showState = false;
+var element, showState = false;
 
 export const init = (options) => {
   element = document.createElement('div');
@@ -18,6 +17,12 @@ export const init = (options) => {
 `;
 
   document.body.appendChild(element);
+};
+
+const syncText = (enabled) => {
+  var statusMessageStateElement = element.querySelector('.vue-geokbd--statusMessage-state');
+
+  statusMessageStateElement.innerHTML = enabled ? STATUS_MSG_TEXT_ON : STATUS_MSG_TEXT_OFF;
 };
 
 const visibility = (visibility, enabled, statusMessage) => {
@@ -33,13 +38,4 @@ const visibility = (visibility, enabled, statusMessage) => {
   }, 100);
 };
 
-const syncText = (enabled) => {
-  var statusMessageStateElement = element.querySelector('.vue-geokbd--statusMessage-state');
-
-  statusMessageStateElement.innerHTML = enabled ? STATUS_MSG_TEXT_ON : STATUS_MSG_TEXT_OFF;
-};
-
-export default {
-  syncText,
-  visibility,
-};
+export default { syncText, visibility };
