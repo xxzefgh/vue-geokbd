@@ -108,10 +108,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.default = function (options) {
 	  return {
-	    bind: function bind() {
+	    bind: function bind(el, binding) {
 	      var _this = this;
 	
-	      this.keypressEvent = function (evt) {
+	      // Vue 1.x support
+	      if (this && this.el) {
+	        el = this.el;
+	        binding = this;
+	      }
+	
+	      binding.keypressEvent = function (evt) {
 	        // Don't capture Ctrl/Meta keypress
 	        if (evt.metaKey || evt.ctrlKey) return;
 	
@@ -129,23 +135,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	        (0, _keypress2.default)(evt);
 	      };
 	
-	      this.focusEvent = function () {
+	      binding.focusEvent = function () {
 	        _statusMsg2.default.visibility(true, options.enabled, options.statusMessage);
 	      };
 	
-	      this.blurEvent = function () {
+	      binding.blurEvent = function () {
 	        _statusMsg2.default.visibility(false, options.enabled, options.statusMessage);
 	      };
 	
-	      this.el.addEventListener('keypress', this.keypressEvent);
-	      this.el.addEventListener('focus', this.focusEvent);
-	      this.el.addEventListener('blur', this.blurEvent);
+	      el.addEventListener('keypress', binding.keypressEvent);
+	      el.addEventListener('focus', binding.focusEvent);
+	      el.addEventListener('blur', binding.blurEvent);
 	    },
 	
-	    unbind: function unbind() {
-	      this.el.removeEventListener('keypress', this.keypressEvent);
-	      this.el.removeEventListener('focus', this.focusEvent);
-	      this.el.removeEventListener('blur', this.blurEvent);
+	    unbind: function unbind(el, binding) {
+	      // Vue 1.x support
+	      if (this && this.el) {
+	        el = this.el;
+	        binding = this;
+	      }
+	
+	      el.removeEventListener('keypress', binding.keypressEvent);
+	      el.removeEventListener('focus', binding.focusEvent);
+	      el.removeEventListener('blur', binding.blurEvent);
 	    },
 	
 	    toggleGlobalState: function toggleGlobalState() {
