@@ -2,7 +2,7 @@
 
 Simple directive to convert english characters to georgian in `<input>` and `<textarea>` fields
 
-[Demo](https://ns-uaomluarir.now.sh/)
+[Demo](https://rawgit.com/brunjick/vue-geokbd/master/example.html)
 
 ### Installation
 
