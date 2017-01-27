@@ -1,0 +1,24 @@
+{
+  "name": "vue-geokbd",
+  "description": "Vue.js georgian keyboard directive",
+  "main": "./dist/js/vue-geokbd.min.js",
+  "authors": [
+    "Mirza Brunjadze <brunjadzem@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "georgian",
+    "keyboard",
+    "directive",
+    "vue-geokbd"
+  ],
+  "homepage": "https://github.com/brunjick/vue-geokbd",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

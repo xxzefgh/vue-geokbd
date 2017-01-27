@@ -27,13 +27,11 @@
     "url": "https://github.com/brunjick/vue-geokbd.git"
   },
   "keywords": [
-    "webpack",
-    "es6",
-    "starter",
-    "library",
-    "universal",
-    "umd",
-    "commonjs"
+    "vue",
+    "georgian",
+    "keyboard",
+    "directive",
+    "vue-geokbd"
   ],
   "bugs": {
     "url": "https://github.com/brunjick/vue-geokbd/issues"
