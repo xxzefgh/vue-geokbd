@@ -1,14 +1,16 @@
 {
   "name": "vue-geokbd",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Vue.js georgian keyboard directive",
   "author": "Mirza Brunjadze <brunjadzem@gmail.com>",
   "license": "MIT",
   "private": false,
   "main": "./dist/js/vue-geokbd.min.js",
   "scripts": {
-    "build": "webpack --mode=build",
-    "dev": "webpack --progress --colors --watch --mode=dev"
+    "dev": "webpack --mode=dev",
+    "watch": "webpack --progress --colors --watch --mode=dev",
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json ./src/**/*.ts",
+    "build": "npm run lint && webpack --mode=build"
   },
   "devDependencies": {
     "babel": "6.3.13",
@@ -17,8 +19,9 @@
     "babel-loader": "6.1.0",
     "babel-plugin-add-module-exports": "0.1.2",
     "babel-preset-es2015": "6.3.13",
-    "eslint": "1.7.2",
-    "eslint-loader": "1.1.0",
+    "ts-loader": "^2.0.0",
+    "tslint": "^4.4.2",
+    "typescript": "^2.1.5",
     "webpack": "1.12.9",
     "yargs": "3.32.0"
   },

@@ -1,38 +1,44 @@
 import handleKeypress from './keypress';
-import statusMsg from './statusMsg';
+import statusMsg from './statusMsgEff';
+import { Options, KeypressEvent } from './interfaces';
 
-export default (options) => ({
-  bind: function (el, binding) {
+export default (options: Options) => ({
+  bind: function (el: any, binding: any) {
     // Vue 1.x support
     if (this && this.el) {
       el = this.el;
       binding = this;
     }
 
-    binding.keypressEvent = (evt) => {
+    binding.keypressEvent = (evt: KeypressEvent) => {
       // Don't capture Ctrl/Meta keypress
-      if (evt.metaKey || evt.ctrlKey) return;
+      if (evt.metaKey || evt.ctrlKey) {
+        return;
+      }
 
       // Check if hotkey was pressed
       if (options.hotkey === String.fromCharCode(evt.which)) {
         evt.preventDefault();
 
-        this.toggleGlobalState();
-        return;
+        statusMsg.enabled(options.enabled = !options.enabled);
+      } else {
+        // Check enabled state
+        if (options.enabled === true) {
+          handleKeypress(evt);
+        }
       }
-
-      // Check enabled state
-      if (options.enabled === false) return;
-
-      handleKeypress(evt);
     };
 
     binding.focusEvent = () => {
-      statusMsg.visibility(true, options.enabled, options.statusMessage);
+      if (options.statusMessage) {
+        statusMsg.visibility(true);
+      }
     };
 
     binding.blurEvent = () => {
-      statusMsg.visibility(false, options.enabled, options.statusMessage);
+      if (options.statusMessage) {
+        statusMsg.visibility(false);
+      }
     };
 
     el.addEventListener('keypress', binding.keypressEvent);
@@ -40,7 +46,7 @@ export default (options) => ({
     el.addEventListener('blur', binding.blurEvent);
   },
 
-  unbind: function (el, binding) {
+  unbind: function (el: any, binding: any) {
     // Vue 1.x support
     if (this && this.el) {
       el = this.el;
@@ -51,9 +57,4 @@ export default (options) => ({
     el.removeEventListener('focus', binding.focusEvent);
     el.removeEventListener('blur', binding.blurEvent);
   },
-
-  toggleGlobalState: function () {
-    options.enabled = !options.enabled;
-    statusMsg.syncText(options.enabled);
-  }
 });

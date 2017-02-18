@@ -15,7 +15,7 @@ if (env === 'build') {
 }
 
 var config = {
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + '/src/index.ts',
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist/js',
@@ -27,20 +27,20 @@ var config = {
   module: {
     loaders: [
       {
-        test: /(\.jsx|\.js)$/,
-        loader: 'babel',
-        exclude: /(node_modules|bower_components)/
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader?presets[]=es2015!ts-loader'
       },
       {
-        test: /(\.jsx|\.js)$/,
-        loader: "eslint-loader",
-        exclude: /node_modules/
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /(node_modules)/
       }
     ]
   },
   resolve: {
     root: path.resolve('./src'),
-    extensions: ['', '.js']
+    extensions: ['.ts', '']
   },
   plugins: plugins
 };
